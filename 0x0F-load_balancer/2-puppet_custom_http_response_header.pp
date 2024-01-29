@@ -1,26 +1,16 @@
-# Update package repositories
-exec { 'update':
+# install and configure nginx
+exec {'update':
   command => '/usr/bin/apt-get update',
 }
-
-# Install Nginx package
-package { 'nginx':
+-> package { 'nginx':
   ensure => installed,
-  require => Exec['update'],
 }
-
-# Add custom HTTP header to Nginx configuration
-file_line { 'header_served_by':
-  path     => '/etc/nginx/sites-enabled/default',
-  line     => 'server {',
-  match    => '^server {',
-  after    => true,
+-> file_line { 'header_served_by':
+  path  => '/etc/nginx/sites-available/default',
+  match => '^server {',
+  line  => "server {\n\tadd_header X-Served-By \"${hostname}\";",
   multiple => false,
-  notify   => Exec['nginx_restart'],
 }
-
-# Restart Nginx service after configuration changes
-exec {'nginx_restart':
+-> exec {'run':
   command => '/usr/sbin/service nginx restart',
-  refreshonly => true,
 }
