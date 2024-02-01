@@ -19,7 +19,7 @@ defaults
 
 frontend www.rorido.tech
     bind *:80
-    bind *:443 ssl crt /etc/ssl/www.saraali.tech/www.saraali.tech.pem
+    bind *:443 ssl crt /etc/ssl/www.rorido.tech/www.rorido.tech.pem
     redirect scheme https code 301 if !{ ssl_fc }
     default_backend servers
 
