@@ -27,7 +27,7 @@ def recurse(subreddit, hot_list=[], after="", count=0):
 
     # Define headers for the HTTP request, including User-Agent
     headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/sara_ali2024)"
     }
 
     # Define parameters for the request, including pagination and limit
@@ -44,7 +44,10 @@ def recurse(subreddit, hot_list=[], after="", count=0):
     # Check if the response status code indicates a not-found error (404)
     if response.status_code == 404:
         return None
+    if response.status_code != 200:
+        return
     # Parse the JSON response and extract relevant data
+    print(response)
     results = response.json().get("data")
     after = results.get("after")
     count += results.get("dist")
