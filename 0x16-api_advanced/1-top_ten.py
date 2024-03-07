@@ -29,7 +29,9 @@ def top_ten(subreddit):
     if response.status_code == 404:
         print("None")
         return
-
+    if response.status_code != 200:
+        print("None")
+        return
     # Parse the JSON response and extract the 'data' section
     results = response.json().get("data")
 
