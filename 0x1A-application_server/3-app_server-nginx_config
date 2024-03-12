@@ -18,9 +18,15 @@ server {
 		alias /data/web_static/current/;
 	}
 
-	# Serve /airbnb-onepage/ route from AirBnB_clone_v2
+	# Serve /airbnb-onepage/ route on AirBnB_clone_v2
 	location /airbnb-onepage/ {
 		proxy_pass http://localhost:5000/airbnb-onepage;
+		proxy_redirect off;
+	}
+
+	# Serve /number_odd_or_even/ route on AirBnB_clone_v2
+	location /airbnb-dynamic/number_odd_or_even/ {
+		proxy_pass http://localhost:5001/number_odd_or_even/;
 		proxy_redirect off;
 	}
 
