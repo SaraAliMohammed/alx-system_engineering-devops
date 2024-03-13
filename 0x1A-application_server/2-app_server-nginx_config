@@ -23,7 +23,7 @@ server {
 		proxy_pass http://localhost:5000/airbnb-onepage;
 	}
 
-	add_header X-Served-By 449593-web-02;
+	add_header X-Served-By 449593-web-01;
 
 	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4.com permanent;
 	# location / {
