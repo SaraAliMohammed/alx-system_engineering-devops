@@ -12,7 +12,7 @@ server {
 
 	# Add index.php to the list if you are using PHP
 
-	server_name _;
+	server_name 54.89.118.156;
 
 	location /hbnb_static/ {
 		alias /data/web_static/current/;
@@ -21,22 +21,26 @@ server {
 	# Serve /airbnb-onepage/ route on AirBnB_clone_v2
 	location /airbnb-onepage/ {
 		proxy_pass http://localhost:5000/airbnb-onepage;
-		proxy_redirect off;
 	}
 
 	# Serve /number_odd_or_even/ route on AirBnB_clone_v2
 	location /airbnb-dynamic/number_odd_or_even/ {
 		proxy_pass http://localhost:5001/number_odd_or_even/;
-		proxy_redirect off;
 	}
 
 	add_header X-Served-By 449593-web-02;
 
 	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4.com permanent;
-	location / {
+	# location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+		# try_files $uri $uri/ =404;
+	# }
+	# 404 error page
+	error_page 404 /404.html;
+	location /404 {
+		root /var/www/html;
+		internal;
 	}
 
 	location /hbnb_static {

@@ -12,7 +12,7 @@ server {
 
 	# Add index.php to the list if you are using PHP
 
-	server_name _;
+	server_name 54.89.118.156;
 
 	location /hbnb_static/ {
 		alias /data/web_static/current/;
@@ -21,19 +21,16 @@ server {
 	# Serve /airbnb-onepage/ route on AirBnB_clone_v3
 	location /airbnb-onepage/ {
 		proxy_pass http://localhost:5000/airbnb-onepage;
-		proxy_redirect off;
 	}
 
 	 # Serve /number_odd_or_even/ route on AirBnB_clone_v3
 	location /airbnb-dynamic/number_odd_or_even/ {
 		proxy_pass http://localhost:5001/number_odd_or_even/;
-		proxy_redirect off;
 	}
 
 	# Serve API on AirBnB_clone_v3
 	location /api/ {
 		proxy_pass http://localhost:5002/api/;
-		proxy_redirect off;
 	}
 
 	# Configure /2-hbnb route of AirBnB_clone_v4 as root location
