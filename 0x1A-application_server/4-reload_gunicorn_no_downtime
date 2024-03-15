@@ -6,11 +6,3 @@
 pkill -HUP -f "gunicorn: master"
 
 echo "Gunicorn reload initiated."
-
-# Check if any old worker processes are still running
-while pgrep -f "gunicorn: worker" > /dev/null; do
-    echo "Waiting for old workers to terminate..."
-    sleep 1
-done
-
-echo "Old workers terminated. New workers started."
