@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-
 # Gracefully reloads Gunicorn without downtime
 
-# Send SIGHUP signal to Gunicorn master process
-pkill -HUP -f "gunicorn: master"
-
-echo "Gunicorn reload initiated."
+pgrep gunicorn | xargs kill -HUP
