@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
-# Gracefully reloads Gunicorn.
 
+# Gracefully reloads Gunicorn without downtime
+
+# Send SIGHUP signal to Gunicorn master process
 pkill -HUP -f "gunicorn: master"
 
-echo "Gunicorn gracefully reloaded."
+echo "Gunicorn reload initiated."
+
+# Check if any old worker processes are still running
+while pgrep -f "gunicorn: worker" > /dev/null; do
+    echo "Waiting for old workers to terminate..."
+    sleep 1
+done
+
+echo "Old workers terminated. New workers started."
